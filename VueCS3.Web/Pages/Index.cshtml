@@ -1,10 +1,23 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+	ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+	<page-index msg="Welcome to Your Vue.js + TypeScript App from razor pages" />
 </div>
+
+<div class="text-center">
+	<h3 class="display-4">Welcome to Vue with Razor Pages</h3>
+	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@section Scripts {
+	<script>
+		var foo = 'nar';
+		(function () {
+			console.log('din scripts');
+		})();
+	</script>
+}

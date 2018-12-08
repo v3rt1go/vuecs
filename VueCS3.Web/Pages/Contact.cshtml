@@ -1,0 +1,18 @@
+﻿@page
+@model VueCS3.Web.Pages.ContactModel
+@{
+	ViewData["Title"] = "Contact din Razor";
+}
+
+<page-contact inline-template>
+	<div>
+		<h1>Contact</h1>
+		<p>@ViewData["Title"]</p>
+		<div>
+			<h3>{{contactTest}}</h3>
+			<p>{{msg}}</p>
+		</div>
+	</div>
+</page-contact>
+
+

@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VueCS3.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VueCliMiddleware;
+using System;
 
 namespace VueCS3.Web
 {
@@ -44,6 +41,11 @@ namespace VueCS3.Web
 
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+			services.AddNodeServices();
+			services.AddSpaStaticFiles(configuration =>
+			{
+				configuration.RootPath = "wwwroot/dist";
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,15 +61,23 @@ namespace VueCS3.Web
 				app.UseExceptionHandler("/Error");
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
+				app.UseHttpsRedirection();
 			}
 
-			app.UseHttpsRedirection();
-			app.UseStaticFiles();
+			// app.UseStaticFiles();
+			app.UseSpaStaticFiles();
 			app.UseCookiePolicy();
-
 			app.UseAuthentication();
-
 			app.UseMvc();
+			app.UseSpa(spa =>
+			{
+				spa.Options.SourcePath = "./";
+				spa.Options.StartupTimeout = TimeSpan.FromSeconds(30);
+				if (env.IsDevelopment())
+				{
+					spa.UseVueCli(npmScript: "serve", port: 8080);
+				}
+			});
 		}
 	}
 }
