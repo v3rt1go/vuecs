@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
-  import 'bootstrap/dist/css/bootstrap.min.css';
-  import 'jquery/dist/jquery.slim.min.js';
+  import 'bootstrap/dist/css/bootstrap.css';
+  import 'bootstrap-vue/dist/bootstrap-vue.css';
   import '@assets/js/site.js';
   import '@assets/css/site.css';
 
@@ -10,7 +10,7 @@
     template: '#app',
   })
   export default class Layout extends Vue {
-    public test: string = 'Vue is working';
+    public appTitle: string = 'VueCS - Vue.js powered Razor Pages';
   }
 </script>
 

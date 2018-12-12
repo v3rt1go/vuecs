@@ -4,11 +4,11 @@ Vue.config.productionTip = false;
 Vue.config.ignoredElements = ['partial', 'environment'];
 // automagically register global components (pages)
 // https://timleland.com/register-global-vue-components-using-webpack/
-const requireComponent = require.context('./Pages', true, /[a-zA-Z]\w+\.cshtml.(vue|js)$/);
-requireComponent.keys().forEach((fileName) => {
+var requireComponent = require.context('./Pages', true, /[a-zA-Z]\w+\.cshtml.(vue|js)$/);
+requireComponent.keys().forEach(function (fileName) {
     // Get component config
-    const componentConfig = requireComponent(fileName);
-    const componentName = 'page-' + fileName.toLowerCase()
+    var componentConfig = requireComponent(fileName);
+    var componentName = 'page-' + fileName.toLowerCase()
         // Remove the "./" from the beginning
         .replace(/^\.\//, '')
         // Remove any occuraces of _ in the filenam
@@ -21,6 +21,6 @@ requireComponent.keys().forEach((fileName) => {
     Vue.component(componentName, componentConfig.default || componentConfig);
 });
 new Vue({
-    render: (h) => h(Layout),
+    render: function (h) { return h(Layout); },
 }).$mount('#app');
 //# sourceMappingURL=Program.js.map

@@ -5,68 +5,35 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>@ViewData["Title"] - VueCS3.Web</title>
 	<environment exclude="Development">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
-			  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-			  crossorigin="anonymous"
-			  integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+		@* TODO: update files on build task from vs tasks.json *@
+		<link href="~/dist/assets/css/chunk-vendors.6c57f554.css" rel="stylesheet" />
+		<link href="~/dist/assets/css/app.37c55a78.css" rel="stylesheet" />
 	</environment>
-	@RenderSection("Header", false)
+
+	@RenderSection("Header", required: false)
 </head>
 <body>
 	<template id="app">
 		<div>
-			<header>
-				<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-					<div class="container">
-						<a class="navbar-brand" asp-area="" asp-page="/Index">VueCS3.Web</a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-								aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-							<partial name="_LoginPartial" />
-							<ul class="navbar-nav flex-grow-1">
-								<li class="nav-item">
-									<a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</header>
+			<partial name="_CookieConsentPartial" />
+			<partial name="_HeaderPartial" />
 			<div class="container">
 				<main role="main" class="pb-3">
-					<h1>{{test}}</h1>
 					@RenderBody()
-					<partial name="_CookieConsentPartial" />
 				</main>
 			</div>
-			<footer class="border-top footer text-muted">
-				<div class="container">
-					&copy; 2018 - VueCS3.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
-				</div>
-			</footer>
+			<partial name="_FooterPartial" />
 		</div>
 	</template>
-	<environment exclude="Development">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-				asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-				asp-fallback-test="window.jQuery"
-				crossorigin="anonymous"
-				integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
-				asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-				asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-				crossorigin="anonymous"
-				integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
-		</script>
+	<environment include="Development">
+		<script src="~/app.js"></script>
 	</environment>
-	<script src="~/app.js"></script>
+	<environment exclude="Development">
+		@* TODO: update files on build task from vs tasks.json *@
+		<script src="~/dist/assets/js/chunk-vendors.65fc0832.js"></script>
+		<script src="~/dist/assets/js/app.ad62a369.js"></script>
+	</environment>
+
 	@RenderSection("Scripts", required: false)
 </body>
 </html>

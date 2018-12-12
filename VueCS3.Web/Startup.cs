@@ -29,6 +29,9 @@ namespace VueCS3.Web
 			{
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
 				options.CheckConsentNeeded = context => true;
+				// The default consent cookie name is ".AspNet.Consent". cookie names starting with a . act funny
+				// when setting them with document.cookie
+				options.ConsentCookie.Name = "VueCS.Consent";
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 

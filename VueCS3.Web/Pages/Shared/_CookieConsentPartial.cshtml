@@ -4,26 +4,14 @@
 	var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
 	var showBanner = !consentFeature?.CanTrack ?? false;
 	var cookieString = consentFeature?.CreateConsentCookie();
+	var privacyLink = Url.Page("/Privacy");
 }
 
 @if (showBanner)
 {
-	<div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-		Use this space to summarize your privacy si cookie use policy. <a asp-page="/Privacy">Learn More</a>.
-		<button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-			<span aria-hidden="true">Accept</span>
-		</button>
-	</div>
-}
-
-@section Scripts {
-	<script>
-		(function () {
-			var button = document.querySelector("#cookieConsent button[data-cookie-string]");
-			button.addEventListener("click", function (event) {
-				console.log('button clicked');
-				document.cookie = button.dataset.cookieString;
-			}, false);
-		})();
-	</script>
+	<page-shared-cookieconsentpartial privacy-link="@privacyLink" cookie-string="@cookieString">
+		<div slot="consentText">
+			This site uses cookies. Like every other site does. If you're that bored, you can read about it here: <a asp-page="/Privacy">Learn More</a>.
+		</div>
+	</page-shared-cookieconsentpartial>
 }

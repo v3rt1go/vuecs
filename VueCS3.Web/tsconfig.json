@@ -10,9 +10,11 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "allowJs": true,
     "baseUrl": ".",
     "types": ["webpack-env", "jest"],
     "paths": {
+        "*": ["types/*"],
       "@/*": ["Pages/*"],
       "@assets/*": ["wwwroot/*"]
     },
