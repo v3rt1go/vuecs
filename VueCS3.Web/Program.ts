@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Layout from './Pages/Shared/_Layout.cshtml.vue';
 
 Vue.config.productionTip = false;
-Vue.config.ignoredElements = ['partial', 'environment'];
+Vue.config.ignoredElements = ['partial', 'environment', 'cache'];
 
 // automagically register global components (pages)
 // https://timleland.com/register-global-vue-components-using-webpack/
@@ -19,7 +19,7 @@ requireComponent.keys().forEach((fileName) => {
   // Remove the file extensions from the end
   .replace(/\.\w+/g, '')
   // Replace all / with -
-  .replace(/\//, '-');
+  .replace(/\//g, '-');
 
   // Globally register the component
   Vue.component(componentName, componentConfig.default || componentConfig);

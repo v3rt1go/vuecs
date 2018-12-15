@@ -1,0 +1,13 @@
+﻿@model List<MenuItem>
+
+<cache expires-after="TimeSpan.FromHours(1)">
+	<ul class="navbar-nav flex-grow-1">
+		@foreach (var menuItem in Model)
+		{
+			<page-shared-components-menu-default link="@Url.Page(menuItem.Page)"
+												 name="@menuItem.Name"
+												 slug="@menuItem.Slug">
+			</page-shared-components-menu-default>
+		}
+	</ul>
+</cache>

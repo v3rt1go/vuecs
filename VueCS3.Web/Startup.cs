@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VueCliMiddleware;
 using System;
+using VueCS3.Web.Services;
+using Microsoft.AspNetCore.Routing;
 
 namespace VueCS3.Web
 {
@@ -42,6 +44,7 @@ namespace VueCS3.Web
 				.AddDefaultUI(UIFramework.Bootstrap4)
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 
+			services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 			services.AddNodeServices();
@@ -49,6 +52,9 @@ namespace VueCS3.Web
 			{
 				configuration.RootPath = "wwwroot/dist";
 			});
+
+			// DI configuration
+			services.AddTransient<MenuService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

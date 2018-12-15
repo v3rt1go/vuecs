@@ -11,7 +11,6 @@ namespace VueCS3.Web.Pages
 	{
 		public void OnGet()
 		{
-
 		}
 	}
 }
